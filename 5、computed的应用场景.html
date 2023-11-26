@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>computed</title>
+</head>
+<body>
+
+<div id="app">
+  Level：{{username}} {{level}}
+  <br>
+  <input type="text" v-model="first">
+  <input type="text" v-model="last">
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/1.0.14/vue.js"></script>
+<script>
+
+
+  new Vue({
+    el : '#app',
+    data: {
+      points: 20,
+      first: 'Jelly',
+      last: 'Bool'
+    },
+    computed:{
+      username:function () {
+        return this.first + '' +this.last
+      },
+      level:function () {
+        if(this.points <= 100){
+          return '普通会员';
+        }
+        return "VIP会员"
+      }
+    }
+  });
+
+</script>
+
+</body>
+</html>

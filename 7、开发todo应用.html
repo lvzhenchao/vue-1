@@ -16,11 +16,15 @@
     </div>
 
     <template id="task-template">
+<!--        <h1>My tasks {{list.length}} </h1>-->
+        <h1>My tasks <span v-show="remaining">{{remaining}}</span> </h1>
         <ul>
             <li
                 @click="toggleTasks(task)"
                 :class="{'completed':task.completed}"
                 v-for="task in list"> {{task.body}}
+
+                <strong @click="deleteTask">X</strong>
             </li>
         </ul>
     </template>
@@ -32,6 +36,17 @@
         methods:{
             toggleTasks:function (task) {
                 task.completed = !task.completed;
+            },
+            deleteTask:function (task) {
+                this.list.$remove(task)
+            }
+        },
+        computed: {
+
+            remaining: function () {
+                return this.list.filter(function (task) {
+                    return !task.completed;
+                }).length;
             }
         }
     });

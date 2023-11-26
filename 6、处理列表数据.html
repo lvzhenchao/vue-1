@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>处理列表数据</title>
+</head>
+<style>
+    .completed{
+        text-decoration: line-through;
+    }
+</style>
+<body>
+
+  <div id="app">
+      <ul>
+<!--          <li :class="task.completed ? 'completed' : ''" v-for="task in tasks"> {{task.body}}</li>-->
+          <li @click="toggleTasks(task)" :class="{'completed':task.completed}" v-for="task in tasks"> {{task.body}}</li>
+<!--          <li :class="['completed', 'truely','someThing']" v-for="task in tasks"> {{task.body}}</li>-->
+      </ul>
+  </div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/1.0.14/vue.js"></script>
+<script>
+
+  new Vue({
+      el : '#app',
+      data:{
+        tasks:[
+            {body:'go to this movie', completed:false},
+            {body:'learn vue js in action', completed:true},
+            {body:'go to the shop', completed:false}
+        ]
+      },
+      methods:{
+          toggleTasks:function (task) {
+              task.completed = !task.completed;
+          }
+      }
+  });
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件式开发</title>
+</head>
+<body>
+
+  <div id="app">
+    <counter heading="likes" color="green"></counter>
+    <counter heading="Dislikes" color="red"></counter>
+  </div>
+
+  <template id="counter-template">
+    <h1>{{ heading }}</h1>
+    <button @click="count+=1" style="background: {{ color }}"> {{count}} </button>
+  </template>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/1.0.14/vue.js"></script>
+<script>
+
+  Vue.component('counter',{
+    // template: '<h1>Hello World</h1>'
+    template: '#counter-template',
+    props:['heading', 'color'],
+    data: function () {
+      return {count : 0}
+    }
+  });
+
+  new Vue({
+    el : '#app',
+  });
+
+</script>
+
+</body>
+</html>

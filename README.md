@@ -24,3 +24,17 @@
 
 # 7、开发todo应用
 - 记得将list绑定到vue里面；否则出现的是字符串
+
+# 8、后端接口
+- 创建模型：php artisan make:mode Task -m
+- 创建工厂：php artisan make:factory TaskFactory --model=Task
+- 创建种子方法：php artisan make:seeder TaskSeeder
+- 生成假数据：php artisan db:seed --class=TaskSeeder 
+
+
+
+
+
+
+
+

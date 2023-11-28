@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $tasks = \App\Models\Task::all();
+    return view('ajax', compact('tasks'));
     return view('welcome', compact('tasks'));
 });

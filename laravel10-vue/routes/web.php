@@ -15,10 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $tasks = \App\Models\Task::all();
+    return view('resource');
     return view('ajax');
     return view('welcome', compact('tasks'));
 });
 
-Route::get('api/tasks', function (){
-    return \App\Models\Task::latest()->get();
-});
+//Route::get('api/tasks', function (){
+//    return \App\Models\Task::latest()->get();
+//});
+
+Route::resource('api/tasks', 'App\Http\Controllers\TaskController');

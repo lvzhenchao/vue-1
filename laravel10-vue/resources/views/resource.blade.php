@@ -32,6 +32,7 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/vue-resource/0.6.1/vue-resource.min.js"></script>
 
 <script>
+    Vue.config.devtools = true;
 
     Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
     var resource = Vue.resource('api/tasks/{id}');

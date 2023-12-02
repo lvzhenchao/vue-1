@@ -39,6 +39,10 @@
 - 引入resource
 - 结合laravel的resource路由，实现创建任务和删除任务，让todo应用更加完善
 
+## 10、彩蛋
+- BootCDN可获取各CDN的静态资源，引入相关的静态资源
+- 添加vue工具
+
 
 
 

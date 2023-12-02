@@ -3,6 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Document</title>
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <meta id="token" name="token" value="{{ csrf_token()}}">
 </head>
 <body>
 
@@ -11,15 +12,15 @@
 </div>
 
 <template id="task-template">
-    <from class="form-group" @submit="createTask">
+    <form class="form-group" @submit="createTask">
         <input type="text" class="form-control" v-model="notes">
         <button type="submit" class="btn btn-success btn-block">Create Task</button>
-    </from>
+    </form>
 
     <h1 style="text-align: center">My task</h1>
     <div style="text-align: center;">
         <ul class="list-group">
-            <li class="list-group-item" v-for="task in list">
+            <li class="list-group-item" v-for="task in list | orderBy 'id' -1">
                 @{{ task.body }}
                 <strong @click="deleteTask(task)">X</strong>
             </li>
@@ -32,6 +33,8 @@
 
 <script>
 
+    Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('value');
+    var resource = Vue.resource('api/tasks/{id}');
     Vue.component('task-app',{
         template: '#task-template',
         props:['list'],
@@ -53,15 +56,24 @@
         },
         methods:{
             deleteTask:function (task) {
-                this.list.$remove(task);
-            },
-            createTask:function () {
-                this.$http.post(
-                    'api/tasks',
-                    {body:notes},
-                    function (response){
+                resource.delete(
+                    {id:task.id},
+                    function (response) {
                         console.log(response);
                     }
+                );
+                this.list.$remove(task);
+            },
+            createTask:function (e) {
+                e.preventDefault();
+                this.$http.post(
+                    'api/tasks',
+                    {body: this.notes},
+                    function (response){
+                        this.list.push(response.task);
+                        this.notes = '';
+                        // console.log(response);
+                    }.bind(this) //或者像上面 定义一个var vm = this;
                 );
             }
         }

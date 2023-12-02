@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class TaskController extends Controller
 {
@@ -37,8 +38,11 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return $request->all();
+        $task = Task::create($request->all());
+        return response()->json([
+            'status' => 'success',
+            'task'   => $task
+        ]);
     }
 
     /**
@@ -73,5 +77,14 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+
+    public function destroy($id)
+    {
+        Task::where('id', $id)->delete();
+        return response()->json([
+            'message' => 'task deleted successfully'
+        ]);
     }
 }

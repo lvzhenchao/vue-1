@@ -35,7 +35,8 @@
 - 是解决Vue应用的ajax请求方面的很好解决方案
 
 ## 9-1、使用Vue的resource路由，结合laravel的resource路由；创建任务和删除任务
-- 
+- 资源组路由
+- 引入resource
 
 
 

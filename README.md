@@ -34,9 +34,10 @@
 # 9、Vue resource插件使用
 - 是解决Vue应用的ajax请求方面的很好解决方案
 
-## 9-1、使用Vue的resource路由，结合laravel的resource路由；创建任务和删除任务
+## 9-1、使用Vue的resource路由
 - 资源组路由
 - 引入resource
+- 结合laravel的resource路由，实现创建任务和删除任务，让todo应用更加完善
 
 
 
